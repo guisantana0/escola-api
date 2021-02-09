@@ -1,0 +1,31 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Guilherme
+ * Date: 08/02/2021
+ * Time: 15:20
+ */
+const CORE_PASTA         = 'core';
+const CONTROLADOR_PASTA   = 'controlador';
+const MODELO_PASTA        = 'modelo';
+const REPOSITORIO_PASTA   = 'repositorio';
+const ROTAS_PASTA   = 'rotas';
+
+define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+
+define('CORE_CAMINHO', dirname(__FILE__).DIRECTORY_SEPARATOR.CORE_PASTA.DIRECTORY_SEPARATOR);
+define('CLASSE_CORE_CAMINHO', dirname(__FILE__).DIRECTORY_SEPARATOR.CORE_PASTA.DIRECTORY_SEPARATOR.'class'.DIRECTORY_SEPARATOR);
+define('INTERFACE_CORE_CAMINHO', dirname(__FILE__).DIRECTORY_SEPARATOR.CORE_PASTA.DIRECTORY_SEPARATOR.'interface'.DIRECTORY_SEPARATOR);
+
+define('CONTROLADOR_CAMINHO', dirname(__FILE__).DIRECTORY_SEPARATOR.CONTROLADOR_PASTA.DIRECTORY_SEPARATOR);
+define('MODELO_CAMINHO', dirname(__FILE__).DIRECTORY_SEPARATOR.MODELO_PASTA.DIRECTORY_SEPARATOR);
+define('REPOSITORIO_CAMINHO', dirname(__FILE__).DIRECTORY_SEPARATOR.REPOSITORIO_PASTA.DIRECTORY_SEPARATOR);
+define('ROTAS_CAMINHO', dirname(__FILE__).DIRECTORY_SEPARATOR.ROTAS_PASTA.DIRECTORY_SEPARATOR);
+define('SISTEMA_CAMINHO', dirname(__FILE__).DIRECTORY_SEPARATOR);
+
+define('SYSDIR', basename(CORE_CAMINHO));
+
+require './core/Core.php';
+
+$BackEnd = new \core\Core();
+$BackEnd->tratarRequisicao();
