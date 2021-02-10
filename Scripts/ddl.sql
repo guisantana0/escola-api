@@ -18,8 +18,9 @@ CREATE TABLE escola.turma (
 	turno varchar(100) DEFAULT 'Turno não informado' NOT NULL COMMENT 'Especifica o período do dia ou noite da turma',
 	escola_id INT NOT NULL COMMENT 'Identificação da escola',
 	id INT auto_increment NOT NULL COMMENT 'Número de identificação da turma.',
+	data_cadastro datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 	CONSTRAINT turma_pk PRIMARY KEY (id),
-	CONSTRAINT turma_fk FOREIGN KEY (id) REFERENCES escola.escola(id)
+	CONSTRAINT turma_fk FOREIGN KEY (escola_id) REFERENCES escola.escola(id)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8
@@ -47,8 +48,8 @@ CREATE TABLE escola.turma_aluno (
 	aluno_id INT NOT NULL COMMENT 'identificação do aluno',
 	data_cadastro datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 	CONSTRAINT turma_aluno_pk PRIMARY KEY (id),
-	CONSTRAINT turma_aluno_fk FOREIGN KEY (id) REFERENCES escola.turma(id),
-	CONSTRAINT turma_aluno_fk_1 FOREIGN KEY (id) REFERENCES escola.aluno(id)
+	CONSTRAINT turma_aluno_fk FOREIGN KEY (turma_id) REFERENCES escola.turma(id),
+	CONSTRAINT turma_aluno_fk_1 FOREIGN KEY (aluno_id) REFERENCES escola.aluno(id)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8
