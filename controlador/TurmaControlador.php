@@ -16,8 +16,9 @@ class TurmaControlador
         $this->repositorio = new TurmaRepositorio();
     }
 
-    public function getTurmas(){
-      echo $this->repositorio->obterTodasTurmas();
+    public function getTurmas($requisicao){
+
+      echo $this->repositorio->obterTodasTurmas($requisicao->get());
     }
 
     public function adicionarNovaTurma($requisicao){

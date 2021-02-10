@@ -12,19 +12,33 @@ require_once INTERFACE_CORE_CAMINHO.'ConstrutorQueryModelo.php';
 class ConstrutorQueryModelo implements \ConstrutorQueryModelo
 {
 
-    protected $modelo;
-
+    protected $modelo, $filtros;
+    protected $queryDeFiltragem;
     public function ConstrutorQueryModelo(\InterfaceModelo $Modelo){
         $this->modelo = $Modelo;
     }
     public function __construct(\InterfaceModelo $modelo)
     {
         $this->modelo = $modelo;
+        $this->queryDeFiltragem = "";
+    }
+
+    public function aplicaFiltros($filtros){
+        $this->filtros = $filtros;
     }
 
     public function obterTodos()
     {
-        return "SELECT * from {$this->modelo->getTabela()} ";
+        return "SELECT * from {$this->modelo->getTabela()}  ";
+    }
+
+    public function obterTodosFiltrado(){
+        $sql = "SELECT * from {$this->modelo->getTabela()} ";
+        if (!empty($this->queryDeFiltragem)) {
+            $sql .= " WHERE  {$this->queryDeFiltragem} ";
+        }
+
+        return $sql;
     }
 
     public function obterPorID($id)
@@ -76,6 +90,20 @@ class ConstrutorQueryModelo implements \ConstrutorQueryModelo
         }
         return $conjuntoDeDados;
     }
+
+   public function where ($coluna,$valor, $condicional = "=" ,  $operadorConjuncao = "AND")
+   {
+       if (!is_float($valor) || !is_int($valor)) {
+           $valor = "'{$valor}'";
+       }
+       if (empty($this->queryDeFiltragem))
+           $this->queryDeFiltragem .= " {$coluna} {$condicional} {$valor} ";
+       else{
+           $this->queryDeFiltragem .= " {$operadorConjuncao} {$coluna} {$condicional} {$valor} ";
+       }
+
+   }
+
 
     public function obterPorChaveEstrangeira($chaveEstrangeira, $valor)
     {

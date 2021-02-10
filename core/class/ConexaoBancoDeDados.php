@@ -47,7 +47,7 @@ class ConexaoBancoDeDados implements \InterfaceConexaoBancoDeDados
                     $this->throwBusinessException($this->conexao, MensagensAplicacao::BANCO_ERRO_CONEXAO);
 
                 //força o nome das coluns serem retornadas como maiúsculas
-                $this->conexao->setAttribute(\PDO::ATTR_CASE, \PDO::CASE_UPPER);
+//                $this->conexao->setAttribute(\PDO::ATTR_CASE, \PDO::CASE_UPPER);
             }
         } catch (Exception $e) {
             print_r($e->getMessage());

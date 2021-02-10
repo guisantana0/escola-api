@@ -22,14 +22,31 @@ abstract class Repositorio implements \InterfaceRepositorio
         $this->efetuaConexaoComBancoDeDados();
     }
 
-    public function consultar($dados)
+    public function consultarSemFiltros()
     {
         // TODO: Implement consultar() method.
 
-        $novoModelo = new $this->modelo($dados);
+        $novoModelo = new $this->modelo();
         $construtorDeQuery = new ConstrutorQueryModelo($novoModelo);
         $query = $construtorDeQuery->obterTodos();
         return  $this->executarQuery($query)->obterResultado();
+    }
+
+    public function consultarComFiltros($filtros = [])
+    {
+        $novoModelo = new $this->modelo();
+        $construtorDeQuery = new ConstrutorQueryModelo($novoModelo);
+        foreach($filtros as $coluna => $valor){
+            $construtorDeQuery->where($coluna,$valor);
+        }
+        $query = $construtorDeQuery->obterTodosFiltrado();
+        return  $this->executarQuery($query)->obterResultado();
+    }
+
+    public function consultarComQuery($query)
+    {
+
+        $this->executarQuery($query)->obterResultado();
     }
 
     private function efetuaConexaoComBancoDeDados(){

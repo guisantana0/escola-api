@@ -18,9 +18,9 @@ class TurmaRepositorio extends  \core\Repositorio
         parent::__construct($umModelo);
     }
 
-    public function obterTodasTurmas(){
+    public function obterTodasTurmas($filtros){
+        $resultado = $this->consultarComFiltros($filtros);
 
-        $resultado = $this->consultar([]);
         return json_encode($resultado);
     }
 

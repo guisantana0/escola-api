@@ -10,4 +10,8 @@ interface InterfaceRepositorio
 {
     public function primeiro();
     public function quantidadeRegistros();
+    public function consultarSemFiltros();
+    public function consultarComFiltros();
+    public function consultarComQuery($query);
+
 }

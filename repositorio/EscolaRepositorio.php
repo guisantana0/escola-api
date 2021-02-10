@@ -18,9 +18,9 @@ class EscolaRepositorio extends  \core\Repositorio
         parent::__construct($umModelo);
     }
 
-    public function obterTodasEscolas(){
+    public function obterTodasEscolas($filtros){
 
-        $resultado = $this->consultar([]);
+        $resultado = $this->consultarComFiltros($filtros);
         return json_encode($resultado);
     }
 
