@@ -19,7 +19,6 @@ class EscolaRepositorio extends  \core\Repositorio
     }
 
     public function obterTodasEscolas($filtros){
-
         $resultado = $this->consultarComFiltros($filtros);
         return json_encode($resultado);
     }

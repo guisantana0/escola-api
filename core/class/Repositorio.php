@@ -24,8 +24,6 @@ abstract class Repositorio implements \InterfaceRepositorio
 
     public function consultarSemFiltros()
     {
-        // TODO: Implement consultar() method.
-
         $novoModelo = new $this->modelo();
         $construtorDeQuery = new ConstrutorQueryModelo($novoModelo);
         $query = $construtorDeQuery->obterTodos();
@@ -45,7 +43,6 @@ abstract class Repositorio implements \InterfaceRepositorio
 
     public function consultarComQuery($query)
     {
-
         $this->executarQuery($query)->obterResultado();
     }
 
@@ -56,8 +53,7 @@ abstract class Repositorio implements \InterfaceRepositorio
     private function executarQuery($query){
         return $this->conexao->executarQuery($query);
     }
-
-
+    
     public function primeiro()
     {
         if (isset($this->registros[0])){

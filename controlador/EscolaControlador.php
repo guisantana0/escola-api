@@ -17,7 +17,7 @@ class EscolaControlador
     }
 
     public function getEscolas($requisicao){
-      echo $this->repositorio->obterTodasEscolas($requisicao->get());
+        echo $this->repositorio->obterTodasEscolas($requisicao->get());
     }
 
     public function adicionarNovaEscola($requisicao){
