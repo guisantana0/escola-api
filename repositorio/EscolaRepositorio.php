@@ -10,7 +10,7 @@ require_once CLASSE_CORE_CAMINHO.'Repositorio.php';
 require_once CLASSE_CORE_CAMINHO.'ConstrutorQueryModelo.php';
 require_once MODELO_CAMINHO.'Escola.php';
 
-class EscolaRepositorio extends \core\Repositorio
+class EscolaRepositorio extends  \core\Repositorio
 {
     public function __construct()
     {
@@ -19,16 +19,20 @@ class EscolaRepositorio extends \core\Repositorio
     }
 
     public function obterTodasEscolas(){
-        $construtorDeConsulta = new \core\ConstrutorQueryModelo(new Escola());
-        $QueryDeConsulta = $construtorDeConsulta->obterTodos();
-        $resultado = $this->executar($QueryDeConsulta);
-        var_dump($resultado);
+
+        $resultado = $this->consultar([]);
         return json_encode($resultado);
     }
 
     public function adicionarNovaEscola($dados){
-        $escola = new Escola($dados);
-        $construtorDeConsulta = new \core\ConstrutorQueryModelo(new Escola());
-        $construtorDeConsulta->adicionar($dados);
+        $this->adicionar($dados);
+    }
+
+    public function atualizarUmaEscola($dados){
+        $this->atualizar($dados);
+    }
+
+    public function excluirEscola($dados){
+        $this->excluirLogicamente($dados);
     }
 }

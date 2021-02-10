@@ -12,9 +12,29 @@ use core\ChamadorControlador;
 class Route
 {
 
-    protected static $GET, $POST;
+    protected static $GET, $POST, $PUT, $DELETE;
 
     protected static $instancia;
+
+    protected $metodoRequisicao;
+
+    public function __construct()
+    {
+        $this->metodoRequisicao = [
+            'POST' => Route::$POST,
+            'GET'  => Route::$GET,
+            'PUT'  => Route::$PUT,
+            'DELETE'  => Route::$DELETE
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getMetodoRequisicao(): array
+    {
+        return $this->metodoRequisicao;
+    }
 
     public static function getInstancia(){
         if (Route::$instancia == null){
@@ -33,15 +53,25 @@ class Route
     public static function post($newURL, $pontoAcesso){
         Route::$POST[$newURL] = $pontoAcesso;
     }
-    
+    public static function put($novaURL, $pontoAcesso){
+        Route::$PUT[$novaURL] = $pontoAcesso;
+    }
+
+    public static function delete($newURL, $pontoAcesso){
+        Route::$DELETE[$newURL] = $pontoAcesso;
+    }
+
     public static function chamaPontoAcesso($url){
         require_once CLASSE_CORE_CAMINHO . 'ChamadorControlador.php';
-        if (isset(Route::$GET[$url])){
-            return new ChamadorControlador(Route::$GET[$url]);
-        }else
-        if (isset(Route::$POST[$url])){
-            return new ChamadorControlador(Route::$POST[$url]);
-        };
-
+        $METODO = $_SERVER['REQUEST_METHOD'];
+        $instanciaRoute = Route::getInstancia();
+        if (isset( $instanciaRoute->getMetodoRequisicao()[$METODO][$url])){
+            $pontoDeAcesso = $instanciaRoute->getMetodoRequisicao()[$METODO][$url];
+            return new ChamadorControlador($pontoDeAcesso);
+        }else{
+           echo json_encode(['sucesso'=>false, 'mensagem'=>'Rota inexistente']);
+        }
     }
+
+
 }

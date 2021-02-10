@@ -19,18 +19,23 @@ abstract class Repositorio implements \InterfaceRepositorio
     public function __construct(\InterfaceModelo $umModelo)
     {
         $this->modelo = $umModelo;
+        $this->efetuaConexaoComBancoDeDados();
     }
 
-    public function executar(string $query)
+    public function consultar($dados)
     {
         // TODO: Implement consultar() method.
-        $this->efetuaConexaoComBancoDeDados();
-        return  $this->executarQuery($query);
+
+        $novoModelo = new $this->modelo($dados);
+        $construtorDeQuery = new ConstrutorQueryModelo($novoModelo);
+        $query = $construtorDeQuery->obterTodos();
+        return  $this->executarQuery($query)->obterResultado();
     }
 
     private function efetuaConexaoComBancoDeDados(){
         $this->conexao = new ConexaoBancoDeDados();
     }
+
     private function executarQuery($query){
         return $this->conexao->executarQuery($query);
     }
@@ -51,9 +56,35 @@ abstract class Repositorio implements \InterfaceRepositorio
         return count($this->registros);
     }
 
-    public function adicionar($dados){
+    protected function adicionar(array $dados){
         $novoModelo = new $this->modelo($dados);
         $construtorDeQuery = new ConstrutorQueryModelo($novoModelo);
-        $novoModelo->adicionar();
+        $query = $construtorDeQuery->adicionar($dados);
+
+        return $this->executarQuery($query);
+    }
+
+    protected function atualizar( array $dados){
+        $novoModelo = new $this->modelo($dados);
+        $construtorDeQuery = new ConstrutorQueryModelo($novoModelo);
+
+        $query = $construtorDeQuery->atualizar($dados);
+
+        return $this->executarQuery($query);
+    }
+
+    protected function excluir(array $dados){
+        $novoModelo = new $this->modelo($dados);
+        $construtorDeQuery = new ConstrutorQueryModelo($novoModelo);
+        $query = $construtorDeQuery->excluir($dados);
+        return $this->executarQuery($query);
+    }
+
+    protected function excluirLogicamente(array $dados){
+        $novoModelo = new $this->modelo($dados);
+        $construtorDeQuery = new ConstrutorQueryModelo($novoModelo);
+
+        $query = $construtorDeQuery->excluirLogicamente($dados);
+        return $this->executarQuery($query);
     }
 }

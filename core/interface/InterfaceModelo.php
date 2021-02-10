@@ -11,6 +11,8 @@ interface InterfaceModelo
     public function getColunas();
     public function getTabela();
     public function getPrimaria();
+    public function getValorPrimaria();
     public function getDados();
+    public function setDados($dados);
 
 }

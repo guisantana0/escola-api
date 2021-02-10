@@ -29,22 +29,32 @@ class ConstrutorQueryModelo implements \ConstrutorQueryModelo
 
     public function obterPorID($id)
     {
-        return "SELECT {$this->modelo->getTabela()}.* from {$this->modelo->getTabela()} where {$this->modelo->getPrimaria()} = {$id}";
+        return "SELECT {$this->modelo->getTabela()}.* from {$this->modelo->getTabela()} where {$this->modelo->getPrimaria()} = {$this->modelo->getValorPrimaria()}";
     }
 
-    public function deletar()
+    public function excluir()
     {
-        return "delete {$this->modelo->getTabela()}.* from {$this->modelo->getTabela()} where {$this->modelo->getPrimaria()} = {$id}";
+        return "delete from {$this->modelo->getTabela()} where {$this->modelo->getPrimaria()} = {$this->modelo->getValorPrimaria()}";
+    }
+
+    public function excluirLogicamente(){
+        return "update {$this->modelo->getTabela()} set SITUACAO='EXCLUIDO' WHERE {$this->modelo->getPrimaria()} = {$this->modelo->getValorPrimaria()}";
     }
 
     public function atualizar(array $dados)
     {
-
+        $this->modelo->setDados($dados);
         $query = "update {$this->modelo->getTabela()} set ";
-        foreach ($dados as $coluna => $dado){
-            $query.= " {$coluna} = {$dado} ";
+        $dadosVerificados = $this->verificaNecessidadeAspas($this->modelo->getDados());
+        foreach ( $dadosVerificados as $coluna => $dado){
+            $querySets []= " {$coluna} = {$dado} ";
         }
-        $query.= " WHERE {$this->modelo->getPrimaria()} = {$this->modelo->dados[$this->modelo->getPrimaria()]}";
+
+        $query .= implode(",",$querySets);
+
+        $query.= " WHERE {$this->modelo->getPrimaria()} = {$this->modelo->getValorPrimaria()}";
+
+        return $query;
     }
 
     public function adicionar(array $dados){
@@ -52,15 +62,19 @@ class ConstrutorQueryModelo implements \ConstrutorQueryModelo
 
         $query .= implode(",",array_intersect_key (array_keys($this->modelo->getDados()),array_values($this->modelo->getColunas())) );
         $query .= ") VALUES (";
-        $query .= implode(",",$this->modelo->getDados());
+        $query .= implode(",",$this->verificaNecessidadeAspas($this->modelo->getDados()));
         $query .= ")";
 
-        $this->modelo->setDados($dados);
-        var_dump(array_intersect_key (array_keys($this->modelo->getDados()),array_values($this->modelo->getColunas())));
-//        var_dump(array_values($this->modelo->getColunas()));
-        var_dump(array_intersect_key (array_keys($this->modelo->getDados()),array_values($this->modelo->getColunas())) );
-        var_dump($query);
-        die;
+        return $query;
+    }
+
+    private function verificaNecessidadeAspas($conjuntoDeDados){
+        foreach($conjuntoDeDados as $indice => $dado){
+            if (!is_int($dado) || !is_float($dado)){
+                $conjuntoDeDados[$indice] = "'{$dado}'";
+            }
+        }
+        return $conjuntoDeDados;
     }
 
     public function obterPorChaveEstrangeira($chaveEstrangeira, $valor)

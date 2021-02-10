@@ -8,7 +8,6 @@
 
 interface InterfaceRepositorio
 {
-    public function executar(string $query);
     public function primeiro();
     public function quantidadeRegistros();
 }

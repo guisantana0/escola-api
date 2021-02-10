@@ -17,7 +17,12 @@ class Requisicao implements InterfaceRequisicao
 
     public function __construct()
     {
-        $this->url  = $_SERVER['PATH_INFO'];
+        if (isset($_SERVER['PATH_INFO'])){
+            $this->url  = $_SERVER['PATH_INFO'];
+        }else{
+            $this->url = '/';
+        }
+
     }
 
     public function get()
@@ -27,6 +32,10 @@ class Requisicao implements InterfaceRequisicao
 
     public function post()
     {
+        return $_POST;
+    }
+
+    public function put(){
         return $_POST;
     }
 

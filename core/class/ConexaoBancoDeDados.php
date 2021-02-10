@@ -15,6 +15,8 @@ class ConexaoBancoDeDados implements \InterfaceConexaoBancoDeDados
 
     protected static $instancia;
 
+    protected $statement;
+
     public function __construct()
     {
         $this->atribuirDadosConexao();
@@ -74,16 +76,17 @@ class ConexaoBancoDeDados implements \InterfaceConexaoBancoDeDados
         $this->iniciarConexao();
 
         $query = $this->preparaQuery($query);
+        $query->execute();
+        $this->statement = $query;
 
-        return $this->executaQuery($query);
+        return $this;
     }
 
     private function preparaQuery($query){
         return $this->conexao->prepare($query);
     }
 
-    private function executaQuery($queryPreparada){
-        $queryPreparada->execute();
-        return $queryPreparada->fetchAll();
+    public function obterResultado(){
+        return $this->statement->fetchAll();
     }
 }

@@ -9,7 +9,7 @@
 namespace core;
 
 
-class Modelo implements \InterfaceModelo
+abstract class Modelo implements \InterfaceModelo
 {
     protected $colunas = [];
 
@@ -51,7 +51,16 @@ class Modelo implements \InterfaceModelo
     }
 
     public function getDados(){
-        return $this->dados;
+        return array_diff_key(
+            $this->dados,
+            [
+                $this->primaria => $this->dados[$this->primaria]
+            ]
+        );
+    }
+
+    public function getValorPrimaria(){
+        return $this->dados[$this->primaria];
     }
 
 }

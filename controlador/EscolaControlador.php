@@ -11,13 +11,24 @@ require_once REPOSITORIO_CAMINHO.'EscolaRepositorio.php';
 class EscolaControlador
 {
 
+    public function __construct()
+    {
+        $this->repositorio = new EscolaRepositorio();
+    }
+
     public function getEscolas(){
-      $escolaRepositorio = new EscolaRepositorio();
-      echo $escolaRepositorio->obterTodasEscolas();
+      echo $this->repositorio->obterTodasEscolas();
     }
 
     public function adicionarNovaEscola($requisicao){
-        $escolaRepositorio = new EscolaRepositorio();
-        $escolaRepositorio->adicionarNovaEscola($requisicao->post());
+        echo $this->repositorio->adicionarNovaEscola($requisicao->post());
+    }
+
+    public function atualizarEscola($requisicao){
+        echo $this->repositorio->atualizarUmaEscola($requisicao->post());
+    }
+
+    public function excluirEscola($requisicao){
+        echo $this->repositorio->excluirEscola($requisicao->post());
     }
 }
