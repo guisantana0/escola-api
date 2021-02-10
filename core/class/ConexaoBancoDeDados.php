@@ -76,6 +76,7 @@ class ConexaoBancoDeDados implements \InterfaceConexaoBancoDeDados
         $this->iniciarConexao();
 
         $query = $this->preparaQuery($query);
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_CLASSTYPE);
         $query->execute();
         $this->statement = $query;
 
