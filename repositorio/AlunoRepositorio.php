@@ -9,19 +9,20 @@
 require_once CLASSE_CORE_CAMINHO.'Repositorio.php';
 require_once CLASSE_CORE_CAMINHO.'ConstrutorQueryModelo.php';
 require_once MODELO_CAMINHO.'Aluno.php';
+require_once QUERY_CAMINHO.'AlunoQuery.php';
 
 class AlunoRepositorio extends  \core\Repositorio
 {
     public function __construct()
     {
-        $umModelo = new Aluno();
+        $umModelo = new app\Aluno();
         parent::__construct($umModelo);
     }
 
     public function obterTodasAlunos(){
 
         $resultado = $this->consultar([]);
-        return json_encode($resultado);
+        return $resultado;
     }
 
     public function adicionarNovaAluno($dados){
@@ -34,5 +35,14 @@ class AlunoRepositorio extends  \core\Repositorio
 
     public function excluirAluno($dados){
         $this->excluirLogicamente($dados);
+    }
+
+    public function obterTodasAlunosDaTurma($dados){
+        if (isset($dados['turma_id'])){
+            $turma_id = $dados['turma_id'];
+        }
+        $construtorQuery = new \app\AlunoQuery($this->modelo);
+        $query = $construtorQuery->obterTodosAlunosDaTurmaPorID($turma_id);
+        return $this->consultarComQuery($query);
     }
 }

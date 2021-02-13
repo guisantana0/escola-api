@@ -37,7 +37,6 @@ class ConstrutorQueryModelo implements \ConstrutorQueryModelo
         if (!empty($this->queryDeFiltragem)) {
             $sql .= " WHERE  {$this->queryDeFiltragem} ";
         }
-
         return $sql;
     }
 

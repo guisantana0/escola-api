@@ -20,8 +20,7 @@ class TurmaRepositorio extends  \core\Repositorio
 
     public function obterTodasTurmas($filtros){
         $resultado = $this->consultarComFiltros($filtros);
-
-        return json_encode($resultado);
+        return $resultado;
     }
 
     public function adicionarNovaTurma($dados){

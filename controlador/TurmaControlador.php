@@ -18,7 +18,7 @@ class TurmaControlador
 
     public function getTurmas($requisicao){
 
-      echo $this->repositorio->obterTodasTurmas($requisicao->get());
+      echo json_encode($this->repositorio->obterTodasTurmas($requisicao->get()));
     }
 
     public function adicionarNovaTurma($requisicao){
@@ -32,4 +32,5 @@ class TurmaControlador
     public function excluirTurma($requisicao){
         echo $this->repositorio->excluirTurma($requisicao->post());
     }
+
 }

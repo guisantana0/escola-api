@@ -5,6 +5,7 @@
  * Date: 09/02/2021
  * Time: 00:00
  */
+namespace app;
 require_once CLASSE_CORE_CAMINHO.'Modelo.php';
 
 class Aluno extends \core\Modelo

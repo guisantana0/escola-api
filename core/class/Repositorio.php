@@ -43,7 +43,7 @@ abstract class Repositorio implements \InterfaceRepositorio
 
     public function consultarComQuery($query)
     {
-        $this->executarQuery($query)->obterResultado();
+        return $this->executarQuery($query)->obterResultado();
     }
 
     private function efetuaConexaoComBancoDeDados(){
@@ -53,7 +53,7 @@ abstract class Repositorio implements \InterfaceRepositorio
     private function executarQuery($query){
         return $this->conexao->executarQuery($query);
     }
-    
+
     public function primeiro()
     {
         if (isset($this->registros[0])){

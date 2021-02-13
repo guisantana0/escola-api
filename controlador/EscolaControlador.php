@@ -8,6 +8,7 @@
 
 require_once REPOSITORIO_CAMINHO.'EscolaRepositorio.php';
 
+
 class EscolaControlador
 {
 
@@ -17,7 +18,7 @@ class EscolaControlador
     }
 
     public function getEscolas($requisicao){
-        echo $this->repositorio->obterTodasEscolas($requisicao->get());
+        echo json_encode($this->repositorio->obterTodasEscolas($requisicao->get()));
     }
 
     public function adicionarNovaEscola($requisicao){

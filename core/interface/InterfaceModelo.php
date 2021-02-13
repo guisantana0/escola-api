@@ -14,5 +14,6 @@ interface InterfaceModelo
     public function getValorPrimaria();
     public function getDados();
     public function setDados($dados);
+    public function getChaveValorPrimaria();
 
 }

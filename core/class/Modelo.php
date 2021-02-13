@@ -63,4 +63,8 @@ abstract class Modelo implements \InterfaceModelo
         return $this->dados[$this->primaria];
     }
 
+    public function getChaveValorPrimaria(){
+        return [$this->primaria=>$this->getChaveValorPrimaria()];
+    }
+
 }

@@ -17,7 +17,11 @@ class AlunoControlador
     }
 
     public function getAlunos(){
-      echo $this->repositorio->obterTodasAlunos();
+      echo json_encode($this->repositorio->obterTodasAlunos());
+    }
+
+    public function getAlunosDaTurma($requisicao){
+        return json_encode($this->repositorio->obterTodasAlunosDaTurma($requisicao->get()));
     }
 
     public function adicionarNovoAluno($requisicao){

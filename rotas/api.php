@@ -17,15 +17,16 @@
 
 \core\Route::get('/turmas','TurmaControlador@getTurmas');
 \core\Route::get('/turmas/','TurmaControlador@getTurmas');
-\core\Route::post('/escola/adicionar','TurmaControlador@adicionarNovaTurma');
-\core\Route::post('/escola/adicionar/','TurmaControlador@adicionarNovaTurma');
-\core\Route::post('/escola/atualizar','TurmaControlador@atualizarTurma');
-\core\Route::post('/escola/atualizar/','TurmaControlador@atualizarTurma');
-\core\Route::post('/escola/excluir','TurmaControlador@excluirTurma');
-\core\Route::post('/escola/excluir/','TurmaControlador@excluirTurma');
+\core\Route::post('/turma/adicionar','TurmaControlador@adicionarNovaTurma');
+\core\Route::post('/turma/adicionar/','TurmaControlador@adicionarNovaTurma');
+\core\Route::post('/turma/atualizar','TurmaControlador@atualizarTurma');
+\core\Route::post('/turma/atualizar/','TurmaControlador@atualizarTurma');
+\core\Route::post('/turma/excluir','TurmaControlador@excluirTurma');
+\core\Route::post('/turma/excluir/','TurmaControlador@excluirTurma');
 
 \core\Route::get('/alunos','AlunoControlador@getAlunos');
 \core\Route::get('/alunos/','AlunoControlador@getAlunos');
+\core\Route::get('/alunos/turma/','AlunoControlador@getAlunosDaTurma');
 \core\Route::post('/aluno/adicionar','AlunoControlador@adicionarNovoAluno');
 \core\Route::post('/aluno/adicionar/','AlunoControlador@adicionarNovoAluno');
 \core\Route::post('/aluno/atualizar','AlunoControlador@atualizarAluno');
