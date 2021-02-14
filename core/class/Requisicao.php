@@ -32,6 +32,9 @@ class Requisicao implements InterfaceRequisicao
 
     public function post()
     {
+        if(empty($_POST)) {
+            return json_decode(file_get_contents('php://input'), true);
+        }
         return $_POST;
     }
 

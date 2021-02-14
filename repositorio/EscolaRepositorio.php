@@ -23,15 +23,39 @@ class EscolaRepositorio extends  \core\Repositorio
         return $resultado;
     }
 
+    public function obterTodasEscolasAtivas($filtros){
+        $filtroAtivo = ['situacao'=>'ATIVO'];
+        $filtros = array_merge($filtros,$filtroAtivo);
+        $resultado = $this->consultarComFiltros($filtros);
+        return $resultado;
+    }
+
     public function adicionarNovaEscola($dados){
-        $this->adicionar($dados);
+        try{
+            $this->adicionar($dados);
+            return true;
+        }catch (Exception $e){
+            return false;
+        }
     }
 
     public function atualizarUmaEscola($dados){
-        $this->atualizar($dados);
+        try{
+            $this->atualizar($dados);
+            return true;
+        }catch (Exception $e){
+            return false;
+        }
+
     }
 
     public function excluirEscola($dados){
-        $this->excluirLogicamente($dados);
+        try{
+            $this->excluirLogicamente($dados);
+            return true;
+        }catch (Exception $e){
+            return false;
+        }
+
     }
 }

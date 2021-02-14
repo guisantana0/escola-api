@@ -54,7 +54,7 @@ abstract class Modelo implements \InterfaceModelo
         return array_diff_key(
             $this->dados,
             [
-                $this->primaria => $this->dados[$this->primaria]
+                $this->primaria => (isset( $this->dados[$this->primaria] ) ? $this->dados[$this->primaria] : '')
             ]
         );
     }
