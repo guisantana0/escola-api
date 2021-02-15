@@ -8,6 +8,8 @@
 
 \core\Route::get('/escolas','EscolaControlador@getEscolas');
 \core\Route::get('/escolas/','EscolaControlador@getEscolas');
+\core\Route::get('/escolas/total-alunos','EscolaControlador@getEscolasComTotalAlunos');
+\core\Route::get('/escolas/total-alunos/','EscolaControlador@getEscolasComTotalAlunos');
 \core\Route::post('/escola/adicionar','EscolaControlador@adicionarNovaEscola');
 \core\Route::post('/escola/adicionar/','EscolaControlador@adicionarNovaEscola');
 \core\Route::post('/escola/atualizar','EscolaControlador@atualizarEscola');

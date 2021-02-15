@@ -22,6 +22,10 @@ class EscolaControlador
         echo json_encode($this->repositorio->obterTodasEscolasAtivas($requisicao->get()));
     }
 
+    public function getEscolasComTotalAlunos($requisicao){
+        echo json_encode($this->repositorio->obterEscolasComTotalDeAlunos($requisicao->get()));
+    }
+
     public function adicionarNovaEscola($requisicao){
         $adicionado = $this->repositorio->adicionarNovaEscola($requisicao->post());
         if ($adicionado){

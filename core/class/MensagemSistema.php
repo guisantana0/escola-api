@@ -33,20 +33,34 @@ class MensagemSistema
 
     public static function ERRO_ADICIONAR_REGISTRO(){
         echo json_encode( [
-            'sucesso'=> true,
+            'sucesso'=> false,
             'mensagem'=> 'ERRO AO ADICIONAR O REGISTRO'
         ] );
     }
     public static function ERRO_ATUALIZAR_REGISTRO(){
         echo json_encode( [
-            'sucesso'=> true,
+            'sucesso'=> false,
             'mensagem'=> 'ERRO AO ATUALIZAR O REGISTRO'
         ] );
     }
     public static function ERRO_EXCLUIR_REGISTRO(){
         echo json_encode( [
-            'sucesso'=> true,
+            'sucesso'=> false,
             'mensagem'=> 'ERRO AO EXCLUIR O REGISTRO'
         ] );
+    }
+
+    public static function ERRO_FILTROS_PESQUISA(){
+        echo json_encode( [
+            'sucesso'=> false,
+            'mensagem'=> 'ERRO AO CONSULTAR DEVIDO A FALTA DE PARÂMETROS'
+        ] );
+    }
+
+    public static function ARRAY_MENSAGEM_ERRO_FILTROS_PESQUISA(){
+        return [
+            'sucesso'=> false,
+            'mensagem'=> 'ERRO AO CONSULTAR DEVIDO A FALTA DE PARÂMETROS'
+        ];
     }
 }
