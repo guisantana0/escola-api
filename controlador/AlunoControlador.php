@@ -7,6 +7,7 @@
  */
 
 require_once REPOSITORIO_CAMINHO.'AlunoRepositorio.php';
+require_once CLASSE_CORE_CAMINHO.'MensagemSistema.php';
 
 class AlunoControlador
 {
@@ -35,14 +36,31 @@ class AlunoControlador
     }
 
     public function adicionarNovoAluno($requisicao){
-        echo $this->repositorio->adicionarNovaAluno($requisicao->post());
+        $adicionado =  $this->repositorio->adicionarNovaAluno($requisicao->post());
+        if ($adicionado){
+            \core\MensagemSistema::REGISTRO_ADICIONADO_SUCESSO();
+        }
+        else{
+            \core\MensagemSistema::ERRO_ADICIONAR_REGISTRO();
+        }
     }
 
     public function atualizarAluno($requisicao){
-        echo $this->repositorio->atualizarUmAluno($requisicao->post());
+        $atualizado =  $this->repositorio->atualizarUmAluno($requisicao->post());
+        if ($atualizado){
+            \core\MensagemSistema::REGISTRO_ATUALIZADO_SUCESSO();
+        }
+        else{
+            \core\MensagemSistema::ERRO_ADICIONAR_REGISTRO();
+        }
     }
 
     public function excluirAluno($requisicao){
-        echo $this->repositorio->excluirAluno($requisicao->post());
+        $excluido = $this->repositorio->excluirAluno($requisicao->post());
+        if ($excluido){
+            \core\MensagemSistema::REGISTRO_EXCLUIDO_SUCESSO();
+        }else{
+            \core\MensagemSistema::ERRO_EXCLUIR_REGISTRO();
+        }
     }
 }

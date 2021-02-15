@@ -7,6 +7,7 @@
  */
 
 require_once REPOSITORIO_CAMINHO.'TurmaRepositorio.php';
+require_once CLASSE_CORE_CAMINHO.'MensagemSistema.php';
 
 class TurmaControlador
 {
