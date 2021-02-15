@@ -26,6 +26,8 @@
 
 \core\Route::get('/alunos','AlunoControlador@getAlunos');
 \core\Route::get('/alunos/','AlunoControlador@getAlunos');
+\core\Route::get('/alunos/nome/','AlunoControlador@getAlunosPorNome');
+\core\Route::get('/alunos/nome/turma/novos/','AlunoControlador@getAlunosQueNaoEstaoNaTurma');
 \core\Route::get('/alunos/turma/','AlunoControlador@getAlunosDaTurma');
 \core\Route::post('/aluno/adicionar','AlunoControlador@adicionarNovoAluno');
 \core\Route::post('/aluno/adicionar/','AlunoControlador@adicionarNovoAluno');

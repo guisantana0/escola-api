@@ -16,12 +16,22 @@ class AlunoControlador
         $this->repositorio = new AlunoRepositorio();
     }
 
-    public function getAlunos(){
-      echo json_encode($this->repositorio->obterTodasAlunos());
+    public function getAlunos($requisicao){
+      echo json_encode($this->repositorio->obterTodasAlunos($requisicao->get()));
+    }
+
+    public function getAlunosPorNome($requisicao){
+        echo json_encode($this->repositorio->obterAlunosPorNome($requisicao->get()));
     }
 
     public function getAlunosDaTurma($requisicao){
         return json_encode($this->repositorio->obterTodasAlunosDaTurma($requisicao->get()));
+    }
+
+    public function getAlunosQueNaoEstaoNaTurma($requisicao){
+        $filtros = $requisicao->get();
+        $alunosQueNaoEstaoNaTurma = $this->repositorio->obterAlunosQueNaoEstaoNaTurma($filtros);
+        return json_encode($alunosQueNaoEstaoNaTurma);
     }
 
     public function adicionarNovoAluno($requisicao){

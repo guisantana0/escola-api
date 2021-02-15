@@ -19,10 +19,29 @@ class AlunoRepositorio extends  \core\Repositorio
         parent::__construct($umModelo);
     }
 
-    public function obterTodasAlunos(){
+    public function obterTodasAlunos($filtros){
 
-        $resultado = $this->consultar([]);
+        $resultado = $this->consultarComFiltros($filtros);
         return $resultado;
+    }
+
+    public function obterAlunosPorNome($filtros){
+        $construtorQuery = new \app\AlunoQuery($this->modelo);
+        if (isset($filtros['nome'])){
+            $query = $construtorQuery->obterAlunosPorNome($filtros['nome']);
+        }else{
+            $query = $construtorQuery->obterAlunosPorNome("");
+        }
+
+        return $this->consultarComQuery($query);
+    }
+
+    public function obterAlunosQueNaoEstaoNaTurma($filtros){
+        $construtorQuery = new \app\AlunoQuery($this->modelo);
+        if ( isset($filtros['nome']) && isset($filtros['turma_id']) ) {
+            $query = $construtorQuery->obterAlunosPorNomeQueNaoEstaoNaTurma($filtros['nome'], $filtros['turma_id']);
+        }
+        return $this->consultarComQuery($query);
     }
 
     public function adicionarNovaAluno($dados){
