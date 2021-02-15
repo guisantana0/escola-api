@@ -28,7 +28,7 @@ class AlunoRepositorio extends  \core\Repositorio
     public function obterAlunosPorNome($filtros){
         $construtorQuery = new \app\AlunoQuery($this->modelo);
         if (isset($filtros['nome'])){
-            $query = $construtorQuery->obterAlunosPorNome($filtros['nome']);
+            $query = $construtorQuery->obterAlunosAtivosPorNome($filtros['nome']);
         }else{
             $query = $construtorQuery->obterAlunosPorNome("");
         }

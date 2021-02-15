@@ -17,6 +17,10 @@ class AlunoQuery extends ConstrutorQueryModelo
         return "SELECT aluno.* from aluno  where aluno.nome like '%{$nome}%' ";
     }
 
+    public function obterAlunosAtivosPorNome($nome){
+        return "SELECT aluno.* from aluno  where aluno.situacao='ATIVO' and aluno.nome like '%{$nome}%' ";
+    }
+
     public function obterAlunosPorNomeQueNaoEstaoNaTurma($nome,$turma_id){
         $sql = "SELECT a.* from aluno a where a.id not in (select ta.aluno_id from turma_aluno ta where ta.turma_id = {$turma_id} ) ";
 

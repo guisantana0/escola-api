@@ -22,16 +22,55 @@ class TurmaControlador
       echo json_encode($this->repositorio->obterTodasTurmas($requisicao->get()));
     }
 
+    public function adicionarAlunoNaTurma($requisicao){
+        $adicionado =  json_encode($this->repositorio->adicionarAlunoNaTurma($requisicao->post()));
+        if ($adicionado){
+            \core\MensagemSistema::REGISTRO_ADICIONADO_SUCESSO();
+        }
+        else{
+            \core\MensagemSistema::ERRO_ADICIONAR_REGISTRO();
+        }
+    }
+
+    public function excluirAlunoNaTurma($requisicao){
+        $excluido =  json_encode($this->repositorio->adicionarAlunoNaTurma($requisicao->post()));
+
+        if ($excluido){
+            \core\MensagemSistema::REGISTRO_EXCLUIDO_SUCESSO();
+        }else{
+            \core\MensagemSistema::ERRO_EXCLUIR_REGISTRO();
+        }
+    }
+
     public function adicionarNovaTurma($requisicao){
-        echo $this->repositorio->adicionarNovaTurma($requisicao->post());
+        $adicionado =  $this->repositorio->adicionarNovaTurma($requisicao->post());
+
+        if ($adicionado){
+            \core\MensagemSistema::REGISTRO_ADICIONADO_SUCESSO();
+        }
+        else{
+            \core\MensagemSistema::ERRO_ADICIONAR_REGISTRO();
+        }
     }
 
     public function atualizarTurma($requisicao){
-        echo $this->repositorio->atualizarUmaTurma($requisicao->post());
+        $atualizado = $this->repositorio->atualizarUmaTurma($requisicao->post());
+        if ($atualizado){
+            \core\MensagemSistema::REGISTRO_ATUALIZADO_SUCESSO();
+        }
+        else{
+            \core\MensagemSistema::ERRO_ADICIONAR_REGISTRO();
+        }
     }
 
     public function excluirTurma($requisicao){
-        echo $this->repositorio->excluirTurma($requisicao->post());
+        $excluido =  $this->repositorio->excluirTurma($requisicao->post());
+
+        if ($excluido){
+            \core\MensagemSistema::REGISTRO_EXCLUIDO_SUCESSO();
+        }else{
+            \core\MensagemSistema::ERRO_EXCLUIR_REGISTRO();
+        }
     }
 
 }
