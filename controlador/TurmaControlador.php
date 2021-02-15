@@ -33,7 +33,17 @@ class TurmaControlador
     }
 
     public function excluirAlunoNaTurma($requisicao){
-        $excluido =  json_encode($this->repositorio->adicionarAlunoNaTurma($requisicao->post()));
+        $excluido =  json_encode($this->repositorio->excluirAlunoNaTurma($requisicao->post()));
+
+        if ($excluido){
+            \core\MensagemSistema::REGISTRO_EXCLUIDO_SUCESSO();
+        }else{
+            \core\MensagemSistema::ERRO_EXCLUIR_REGISTRO();
+        }
+    }
+
+    public function excluirAlunoNaTurmaPorAlunoTurma($requisicao){
+        $excluido =  json_encode($this->repositorio->excluirAlunoNaTurmaPorAlunoTurma($requisicao->post()));
 
         if ($excluido){
             \core\MensagemSistema::REGISTRO_EXCLUIDO_SUCESSO();

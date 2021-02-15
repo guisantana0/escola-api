@@ -44,6 +44,13 @@ class TurmaRepositorio extends  \core\Repositorio
     }
 
     public function excluirAlunoNaTurma($dados){
+
+        $construtorQuery = new \app\TurmaQuery(new TurmaAluno());
+        $query = $construtorQuery->excluirAlunoDaTurmaPorTurmaAluno($dados['turma_id'],$dados['aluno_id']);
+
+        return $this->executarQuery($query);
+    }
+    public function excluirAlunoNaTurmaPorAlunoTurma($dados){
         $this->modelo = new TurmaAluno();
         $resultado = $this->excluir($dados);
         return $resultado;

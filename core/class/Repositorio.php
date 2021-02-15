@@ -50,7 +50,7 @@ abstract class Repositorio implements \InterfaceRepositorio
         $this->conexao = new ConexaoBancoDeDados();
     }
 
-    private function executarQuery($query){
+    public function executarQuery($query){
         return $this->conexao->executarQuery($query);
     }
 

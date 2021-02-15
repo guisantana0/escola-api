@@ -21,6 +21,8 @@
 \core\Route::post('/turma/adicionar/','TurmaControlador@adicionarNovaTurma');
 \core\Route::post('/turma/adicionar/aluno','TurmaControlador@adicionarAlunoNaTurma');
 \core\Route::post('/turma/adicionar/aluno/','TurmaControlador@adicionarAlunoNaTurma');
+\core\Route::post('/turma/excluir/aluno/','TurmaControlador@excluirAlunoNaTurma');
+\core\Route::post('/turma/excluir/aluno','TurmaControlador@excluirAlunoNaTurma');
 \core\Route::post('/turma/atualizar','TurmaControlador@atualizarTurma');
 \core\Route::post('/turma/atualizar/','TurmaControlador@atualizarTurma');
 \core\Route::post('/turma/excluir','TurmaControlador@excluirTurma');
